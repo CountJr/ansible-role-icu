@@ -1,0 +1,30 @@
+---
+# tasks file for icu
+
+- name: Update apt cache.
+  apt:
+    update_cache: yes
+    cache_valid_time: 600
+  changed_when: False
+
+- name: Make Sure All Required Packages Are Present
+  apt:
+    name: "{{ item }}"
+    state: present
+  with_items:
+    - gcc
+    - g++
+    - make
+
+# - name: check ICU version
+
+
+# - name: update ICU
+#   shell: |
+#     curl -sS -o /tmp/icu.tar.gz -L http://download.icu-project.org/files/icu4c/59.1/icu4c-59_1-src.tgz
+#     tar -zxf /tmp/icu.tar.gz -C /tmp
+#     cd /tmp/icu/source
+#     ./configure --prefix=/usr/local
+#     make
+#     make install
+#   become: true
