@@ -16,6 +16,10 @@
     - g++
     - make
 
+- name: debug
+  debug:
+    msg: "{{ ansible_env }}"
+    
 # - name: check ICU version
 
 
