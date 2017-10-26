@@ -1,25 +1,11 @@
 ---
 # tasks file for icu
 
-- name: Update apt cache.
-  apt:
-    update_cache: yes
-    cache_valid_time: 600
-  changed_when: False
-
-- name: Make Sure All Required Packages Are Present
-  apt:
-    name: "{{ item }}"
-    state: present
-  with_items:
-    - gcc
-    - g++
-    - make
 
 - name: debug
   debug:
     msg: "{{ ansible_env }}"
-    
+
 # - name: check ICU version
 
 
