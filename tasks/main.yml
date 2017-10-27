@@ -24,7 +24,7 @@
     dest: /tmp
     remote_src: yes
   register: icu_unarchive_result
-  when: icu_config_version.stdout != icu_config_version_expected
+  when: icu_config_version.stdout != 59.1
 
 - name: debug
   debug:
