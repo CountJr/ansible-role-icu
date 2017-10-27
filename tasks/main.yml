@@ -7,9 +7,29 @@
   changed_when: false
   ignore_errors: true
 
+- name: Download ICU with Checksum
+  get_url:
+    url: http://download.icu-project.org/files/icu4c/59.1/icu4c-59_1-src.tgz
+    dest: /tmp/icu.tar.gz
+    # checksum: "{{ icu_checksum }}"
+    timeout: 30
+  register: icu_get_url_result
+  until: "'OK' in icu_get_url_result.msg or 'file already exists' in icu_get_url_result.msg"
+  retries: 5
+  when: icu_config_version.stdout != 59.1
+
+- name: Unarchive ICU
+  unarchive:
+    src: /tmp/icu.tar.gz
+    dest: /tmp
+    remote_src: yes
+  register: icu_unarchive_result
+  when: icu_config_version.stdout != icu_config_version_expected
+
 - name: debug
   debug:
-    msg: "{{ icu_config_version }}"
+    msg: "{{ icu_config_version }} {{ icu_get_url_result }} {{ icu_unarchive_result }}"
+
 
 # - name: check ICU version
 
