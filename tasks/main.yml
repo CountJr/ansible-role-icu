@@ -1,10 +1,15 @@
 ---
 # tasks file for icu
 
+- name: Check current version of ICU
+  shell: /usr/local/bin/icu-config --version
+  register: icu_config_version
+  changed_when: False
+  ignore_errors: Tru
 
 - name: debug
   debug:
-    msg: "{{ ansible_env }}"
+    msg: "{{ icu_config_version }}"
 
 # - name: check ICU version
 
