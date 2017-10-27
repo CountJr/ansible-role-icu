@@ -4,8 +4,8 @@
 - name: Check current version of ICU
   shell: /usr/local/bin/icu-config --version
   register: icu_config_version
-  changed_when: False
-  ignore_errors: Tru
+  changed_when: false
+  ignore_errors: true
 
 - name: debug
   debug:
